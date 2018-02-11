@@ -4,6 +4,8 @@ from flask_bootstrap import Bootstrap
 from config import config_options
 from flask_login import LoginManager
 from flask_uploads import UploadSet, configure_uploads,IMAGES
+from flask_moment import Moment
+
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -13,6 +15,7 @@ photos = UploadSet('photos',IMAGES)
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+moment = Moment()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -23,6 +26,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
+    moment.init_app(app)
 
     #configure uploadset
     configure_uploads(app,photos)
