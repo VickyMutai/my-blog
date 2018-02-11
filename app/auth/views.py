@@ -14,7 +14,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         token =  user.generate_confirmation_token()
-        send_email(user.email,'Confirm Your Acoount',
+        send_email(user.email,'auth/email/confirm',
                     'auth/email/confirm',user=user,token=token)
         flash('A confirmation by email has been sent to you by email')
         return redirect(url_for('auth.login'))
