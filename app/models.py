@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
+    blogs = db.relationship('Blog',backref='author',lazy='dynamic')
 
     
     @property
@@ -32,3 +33,14 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f'{self.username}'
+
+    def ping(self):
+        self.last_seen = datetime.utcnow()
+        db.session.add(self)
+
+class Blog(db.Model):
+    __tablename__='blogs'
+    id = db.Column(db.Integer,primary_key=True)
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True,default=datetime.utcnow)
+    author_id= db.Column(db.Integer,db.ForeignKey('users.id'))
