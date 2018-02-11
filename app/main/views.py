@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required
 from ..models import User
-from .forms import UpdateProfile
+from .forms import UpdateProfile,BlogForm
 from .. import db,photos
 
 @main.route('/')
@@ -10,7 +10,8 @@ def index():
     '''
         View root page function that returns the index page and its data
     '''
-    title = 'VICTORIA MUTAI'
+    title = 'POETRY HOME | Home of Poetry'
+
     return render_template('index.html',title=title)
 
 @main.route('/user/<uname>')
