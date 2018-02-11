@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <h3>{{user.name | capitalize}}</h3>
+            <h3>{{user.username | capitalize}}</h3>
 
             <!--Displaying user bio-->
             {% if user.bio %}
             <p>{{user.bio}}</p>
             {% else %}
-            <p>{{user.name| capitalize}} has no bio</p>
+            <p>{{user.username| capitalize}} has no bio</p>
             {% endif %}
         </div>
         <!-- Displaying profile photo -->
