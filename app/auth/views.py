@@ -1,5 +1,5 @@
 from flask import render_template,redirect,url_for,request,flash
-from flask_login import login_user,logout_user,login_required
+from flask_login import current_user,login_user,logout_user,login_required
 from . import auth
 from ..models import User
 from .forms import RegistrationForm,LoginForm
@@ -34,6 +34,17 @@ def login():
 
     title = "Pitch login"
     return render_template('auth/login.html',login_form = login_form,title=title)
+
+@auth.route('confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('main.index'))
+    if current_user.confirm(token):
+        flash("You have confirmed your account. Thanks!")
+    else:
+        flash("The confirmation link is invalid or has expired.")
+    return redirect(url_for('main.index'))
 
 @auth.route('/logout')
 @login_required

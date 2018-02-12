@@ -6,7 +6,9 @@ from flask_login import LoginManager
 from flask_uploads import UploadSet, configure_uploads,IMAGES
 from flask_moment import Moment
 from flask_mail import Mail 
+import sys
 
+sys.setrecursionlimit(2000)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
