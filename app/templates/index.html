@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 {% block content %}
+<button><a href="/blog/new">Add Blog</a></button>
+<div class="container">
+    <div class="row">
+        {{macro.displayBlog(poems)}}
+    </div>
+</div>
 {% endblock %}

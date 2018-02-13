@@ -1,0 +1,7 @@
+<!--display blog in macros-->
+{% macro displayBlog(blog_list) %}
+    {% for blog in blog_list %}
+        <h2>{{blog.title}}</h2>
+        <p>{{blog.body}}</p>
+    {% endfor %}
+{% endmacro %}

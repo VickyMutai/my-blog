@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from flask_login import login_required
-from ..models import User
+from flask_login import login_required,current_user
+from ..models import User,Blog
 from .forms import UpdateProfile,BlogForm
 from .. import db,photos
 
@@ -10,9 +10,10 @@ def index():
     '''
         View root page function that returns the index page and its data
     '''
+    poems = Blog.query.all()
     title = 'POETRY HOME | Home of Poetry'
 
-    return render_template('index.html',title=title)
+    return render_template('index.html',poems=poems,title=title)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -52,6 +53,19 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/blog/new',methods=['GET','POST'])
+@login_required
+def new_blog():
+    form = BlogForm()
+    if form.validate_on_submit():
+        title=form.title.data
+        body=form.body.data
+        new_blog=Blog(title=title,body=body)
+        new_blog.save_blog()
+        return redirect(url_for('main.index'))
+    title = 'Home of poetry'
+    return render_template('new_blog.html',title=title,blog_form=form)
 
 @main.route('/about')
 def about():
