@@ -8,8 +8,19 @@
 
 {% macro displayComments(comment_list) %}
 {% for comment in comment_list %}
-            {{comment.timestamp}}   
-                {{ comment.comment_body}}
-                {{ comment.name }} 
+<div class="row col-lg-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <p>Author name: <i>{{ comment.name }}</i></p> 
+        </div>
+        <div class="panel-body">
+            <p>{{ comment.comment_body}}</p>
+        </div>
+        <div class="panel-footer">
+            <i>{{comment.timestamp}}</i>
+        </div>
+    </div>
+</div>
+            
 {% endfor %}
 {% endmacro %}
