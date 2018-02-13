@@ -15,7 +15,7 @@ photos = UploadSet('photos',IMAGES)
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
-email = Mail()
+mail = Mail()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -26,7 +26,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
-    email.init_app(app)
+    mail.init_app(app)
 
     #configure uploadset
     configure_uploads(app,photos)
