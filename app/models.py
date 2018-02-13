@@ -65,13 +65,15 @@ class Comment(db.Model):
     all_comments=[]
     __tablename__='comments'
     id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(255))
     comment_body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True,default=datetime.utcnow)
     author_id= db.Column(db.Integer,db.ForeignKey('users.id'))
     blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
 
-    def __init__(self,comment_body):
-        self.comment_body = body
+    def __init__(self,name,comment_body):
+        self.name = name
+        self.comment_body = comment_body
 
     def save_comment(self):
         db.session.add(self)

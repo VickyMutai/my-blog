@@ -3,5 +3,8 @@
     {% for blog in blog_list %}
         <h2>{{blog.title}}</h2>
         <p>{{blog.body}}</p>
+        <button class="btn btn-info">
+            <a href="\comment">Comment</a>
+        </button>
     {% endfor %}
 {% endmacro %}

@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Blog
-from .forms import UpdateProfile,BlogForm
+from ..models import User,Blog,Comment
+from .forms import UpdateProfile,BlogForm,CommentForm
 from .. import db,photos
 
 @main.route('/')
@@ -72,3 +72,18 @@ def new_blog():
 def about():
     title = 'Home Of Poetry'
     return render_template('about.html',title=title)
+
+@main.route('/comment',methods=['GET','POST'])
+def new_comment():
+    form = CommentForm()
+
+    if form.validate_on_submit():
+        name = form.name.data
+        comment_body = form.comment_body.data
+        new_comment = Comment(comment_body=comment_body,name=name)
+        new_comment.save_comment()
+
+        return redirect(url_for('main.index'))
+
+    title='Comment'
+    return render_template('new_comment.html',title=title,comment_form=form)
