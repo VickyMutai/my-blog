@@ -90,3 +90,23 @@ class Comment(db.Model):
     @classmethod
     def clear_blogs(cls):
         Blog.all_blogs.clear()
+
+class Subscribe(db.Model):
+    all_subscription = []
+    __tablename__='subscribe'
+    id=db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String(255))
+    email=db.Column(db.String(255))
+
+    def __init__(self,name,email):
+        self.name = name
+        self.email = email
+
+    def save_subscriber(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls):
+        subscribes=Subscribe.query.all()
+        return subscribes

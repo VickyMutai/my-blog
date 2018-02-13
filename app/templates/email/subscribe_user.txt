@@ -1,0 +1,5 @@
+Hello {{subscriber.name}}
+Thank you for subscribing to the HOME OF POETRY BLOG
+Stay tuned for more updates from us.
+Yours faithfully,
+Home of Poetry Team

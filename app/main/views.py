@@ -1,9 +1,10 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Blog,Comment
-from .forms import UpdateProfile,BlogForm,CommentForm
+from ..models import User,Blog,Comment,Subscribe
+from .forms import UpdateProfile,BlogForm,CommentForm,SubscribeForm
 from .. import db,photos
+from ..email import mail_message
 
 @main.route('/')
 def index():
@@ -106,4 +107,15 @@ def new_comment(id):
 
 @main.route('/subscribe',methods=["GET","POST"])
 def subscribe():
-    
+    form=SubscribeForm()
+
+    if form.validate_on_submit():
+        subscriber = Subscribe(name=form.name.data,email=form.email.data)
+        db.session.add(subscriber)
+        db.session.commit()
+
+        mail_message("Welcome to Home of Poetry","email/subscribe_user",subscriber.email,subscriber=subscriber)
+        flash('A confirmation by email has been sent to you by email')
+        return redirect(url_for('main.index'))
+        title = 'Subscribe'
+    return render_template('subscribe.html',subscribe_form=form)
