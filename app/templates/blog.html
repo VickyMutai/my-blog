@@ -1,20 +1,15 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 {% block content %}
-    {{blog.title | upper}}
-    {{blog.body}}
 
-        <div class="footer" style="background-color:black; color:aliceblue; font-size:20px; position:fixed; bottom:0%; width:100%">
-                <div class="row" style="padding-top:5%">
-                        <div class="col-md-2 col-lg-2"></div>
-                        <div class="col-md-4 col-lg-4">
-                            <p>&copy; Copyright 2018 <a href="VickyMutai@github.com">Victoria Mutai</a></p>  
-                        </div>
-                        <div class="col-md-4 col-lg-4">
-                            <p>Contact me at: <a href="mailto:vicky.mutai@gmail.com">My Email</a></p>
-                            <p>Phone Number: 0716889165</p>
-                        </div>
-                        <div class="col-md-2 col-lg-2"></div>    
-                    </div>
-                </div>     
+    <h1>
+        {{blog.title | upper}}
+    </h1>
+    Author: <i>{{blog.user.username}}</i>
+    <p>
+        {{blog.body}}   
+    </p>
+    <p><a href="/comment/new/{{blog.id}}">Comment</a></p>
+    <h2>Comments</h2>
+        {{ macro.displayComments(comments) }}
 {% endblock %}

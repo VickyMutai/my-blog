@@ -2,5 +2,14 @@
 {% macro displayBlog(blog_list) %}
     {% for blog in blog_list %}
         <h3><a href="/blog/{{blog.id}}">{{blog.title}}</a></h3>
+        <p>Posted on: {{blog.timestamp}}</p>
     {% endfor %}
+{% endmacro %}
+
+{% macro displayComments(comment_list) %}
+{% for comment in comment_list %}
+            {{comment.timestamp}}   
+                {{ comment.comment_body}}
+                {{ comment.name }} 
+{% endfor %}
 {% endmacro %}

@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
-    blogs = db.relationship('Blog',backref='author',lazy='dynamic')
+    blogs = db.relationship('Blog',backref='user',lazy='dynamic')
 
     @property
     def password(self):
@@ -41,10 +41,11 @@ class Blog(db.Model):
     title = db.Column(db.String())
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True,default=datetime.utcnow)
-    author_id= db.Column(db.Integer,db.ForeignKey('users.id'))
-    comments = db.relationship('Comment',backref='comment',lazy='dynamic')
+    user_id= db.Column(db.Integer,db.ForeignKey('users.id'))
+    comments = db.relationship('Comment',backref='blog',lazy='dynamic')
 
-    def __init__(self,title,body):
+    def __init__(self,title,body,user):
+        self.user = user
         self.title = title
         self.body = body
 
@@ -71,17 +72,19 @@ class Comment(db.Model):
     author_id= db.Column(db.Integer,db.ForeignKey('users.id'))
     blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
 
-    def __init__(self,name,comment_body):
+
+    def __init__(self,name,comment_body,blog):
         self.name = name
         self.comment_body = comment_body
+        self.blog = blog
 
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_comments(cls):
-        comments=Comment.query.all()
+    def get_comments(cls,blog_id):
+        comments=Comment.query.filter_by(blog_id=blog_id).all()
         return comments
 
     @classmethod
