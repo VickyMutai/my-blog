@@ -1,10 +1,48 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 {% block content %}
-<div class="container">
-<button><a href="/blog/new">Add Blog</a></button>
-    <div class="row">
-        {{macro.displayBlog(poems)}}
+<div class="container">    
+        <div class="row">
+                  <img src="./static/photos/coverpic.jpg" class="cover" style="width:100%"/>
+            </div>
+        
+    <div class="row col-sm-9 col-xs-9 col-md-8 col-lg-8">
+            <h2>THOUGHTS</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend feugiat felis, 
+                at cursus ex condimentum eu. In hac habitasse platea dictumst. Nullam dignissim tortor 
+                nec ultrices efficitur. Curabitur sed ex tempus, pulvinar mauris eu, rhoncus felis. 
+                Maecenas accumsan mi orci, at tempor lorem blandit ac. Cras fringilla congue nibh id luctus. </p>
+            <p>
+                    Maecenas pharetra lacus fermentum nibh tempus semper. Etiam dapibus bibendum libero non efficitur. 
+                    Morbi vulputate eros vel augue iaculis gravida. Duis scelerisque neque eu justo mollis, nec cursus 
+                    risus hendrerit. Aenean sodales tempor odio pretium tincidunt. 
+                    Morbi iaculis quis ante non tristique. Sed a rhoncus justo.
+            </p>
+            <p>
+                    risus hendrerit. Aenean sodales tempor odio pretium tincidunt. 
+                    Morbi iaculis quis ante non tristique. Sed a rhoncus justo.
+                    Morbi vulputate eros vel augue iaculis gravida. Duis scelerisque neque eu justo mollis, nec cursus 
+                    risus hendrerit. Aenean sodales tempor odio pretium tincidunt. 
+            </p>
+            </div>
+    <div class="row col-sm-1 col-xs-1 col-md-1 col-lg-1" ></div>
+    <div class="row col-sm-2 col-xs-2 col-md-3 col-lg-3" style="border-left: 3px black">
+            <h2>View Blogs</h2>
+                {{macro.displayBlog(poems)}}
+        </div>
     </div>
-</div>
+    <div class="jumbotron" style="background-color:black; color:aliceblue; font-size:20px">
+        <div class="row">
+            <div class="col-md-2 col-lg-2"></div>
+            <div class="col-md-4 col-lg-4">
+                <footer>&copy; Copyright 2018 <a href="VickyMutai@github.com">Victoria Mutai</a></footer>  
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <p>Contact me at: <a href="mailto:vicky.mutai@gmail.com">My Email</a></p>
+                <p>Phone Number: 0716889165</p>
+            </div>
+            <div class="col-md-2 col-lg-2"></div>    
+        </div>
+                  
+    </div>
 {% endblock %}
