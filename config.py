@@ -11,9 +11,6 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
-    SIMPLEMDE_JS_LIFE = True
-    SIMPLEMDE_USE_CDN = True
-
 
 class ProdConfig(Config):
     pass

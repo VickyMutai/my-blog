@@ -4,7 +4,6 @@ from flask_login import login_required,current_user
 from ..models import User,Blog
 from .forms import UpdateProfile,BlogForm
 from .. import db,photos
-import markdown2
 
 @main.route('/')
 def index():
@@ -68,6 +67,7 @@ def new_blog():
     title = 'Home of poetry'
     return render_template('new_blog.html',title=title,blog_form=form)
     
+
 @main.route('/about')
 def about():
     title = 'Home Of Poetry'

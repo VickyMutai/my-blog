@@ -10,3 +10,5 @@ class BlogForm(FlaskForm):
     title = StringField("Caption",validators=[Required()])
     body = TextAreaField("Whats on your mind?", validators=[Required()])
     submit = SubmitField('Submit')
+
+#class CommentForm(FlaskForm):
