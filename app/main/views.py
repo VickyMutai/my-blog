@@ -67,6 +67,13 @@ def new_blog():
     title = 'Home of poetry'
     return render_template('new_blog.html',title=title,blog_form=form)
     
+@main.route('/blog/<int:id>')
+def view_blog(id):
+    form=BlogForm()
+    blog= Blog.query.filter_by(id=id).first()
+    title = 'Home of Poetry'
+    return render_template('blog.html',title=title,blog=blog,blog_form=form)
+
 
 @main.route('/about')
 def about():
