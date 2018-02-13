@@ -34,11 +34,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'{self.username}'
 
-    def ping(self):
-        self.last_seen = datetime.utcnow()
-        db.session.add(self)
-
-
 class Blog(db.Model):
     all_blogs=[]
     __tablename__='blogs'
@@ -47,6 +42,7 @@ class Blog(db.Model):
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True,default=datetime.utcnow)
     author_id= db.Column(db.Integer,db.ForeignKey('users.id'))
+    comments = db.relationship('Comments',backref='comment',lazy='dynamic')
 
     def __init__(self,title,body):
         self.title = title
@@ -60,6 +56,31 @@ class Blog(db.Model):
     def get_blogs(cls):
         blogs=Blog.query.all()
         return reviews
+
+    @classmethod
+    def clear_blogs(cls):
+        Blog.all_blogs.clear()
+
+class Comment(db.Model):
+    all_comments=[]
+    __tablename__='comments'
+    id = db.Column(db.Integer,primary_key=True)
+    comment_body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True,default=datetime.utcnow)
+    author_id= db.Column(db.Integer,db.ForeignKey('users.id'))
+    blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
+
+    def __init__(self,comment_body):
+        self.comment_body = body
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls):
+        comments=Comment.query.all()
+        return comments
 
     @classmethod
     def clear_blogs(cls):
