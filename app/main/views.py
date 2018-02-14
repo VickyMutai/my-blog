@@ -60,12 +60,16 @@ def update_pic(uname):
 @login_required
 def new_blog():
     form = BlogForm()
+    subscriber= Subscribe.query.all()
     if form.validate_on_submit():
         title=form.title.data
         body=form.body.data
         new_blog=Blog(title=title,body=body,user=current_user)
         new_blog.save_blog()
+        for sub in subscriber:
+            mail_message("New Blog Alert","email/update",sub.email,sub=sub)
         return redirect(url_for('main.index'))
+
     title = 'Home of poetry'
     return render_template('new_blog.html',title=title,blog_form=form)
     

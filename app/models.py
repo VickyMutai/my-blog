@@ -56,7 +56,7 @@ class Blog(db.Model):
     @classmethod
     def get_blogs(cls):
         blogs=Blog.query.all()
-        return reviews
+        return blogs
 
     @classmethod
     def clear_blogs(cls):
@@ -92,7 +92,7 @@ class Comment(db.Model):
         Blog.all_blogs.clear()
 
 class Subscribe(db.Model):
-    all_subscription = []
+    # all_subscription = []
     __tablename__='subscribe'
     id=db.Column(db.Integer,primary_key=True)
     name=db.Column(db.String(255))
@@ -107,6 +107,6 @@ class Subscribe(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_comments(cls):
-        subscribes=Subscribe.query.all()
-        return subscribes
+    def get_subscribers(cls):
+        subscribers=Subscribe.query.all()
+        return subscribers
