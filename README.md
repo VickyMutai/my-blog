@@ -1,4 +1,4 @@
-# ONE MINUTE PITCH
+# BLOG
 #### This is a blog that contains different poetic pieces. It allows users to comment and subscribe on the blog and subscribe to new blogs
 
 #### By ****Victoria Cherotich Mutai****
